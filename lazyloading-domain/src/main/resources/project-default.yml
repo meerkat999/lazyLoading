@@ -1,0 +1,8 @@
+swarm:
+  datasources:
+    data-sources:
+      lazyloadingDS:
+        driver-name: mysql
+        connection-url: jdbc:mysql://127.0.0.1:3306/lldb?serverTimezone=UTC&useSSL=false&zeroDateTimeBehavior=convertToNull&autoReconnect=true&failOverReadOnly=false&maxReconnects=10
+        user-name: root
+        password: root
