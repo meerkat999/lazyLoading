@@ -22,12 +22,12 @@ public class ClienteServiceImpl implements IClienteService {
 	}
 
 	@Override
-	public Cliente getByID(String cedula) {
+	public Cliente getByID(Long cedula) {
 		return repository.findOne(cedula);
 	}
 	
 	@Override
-	public Cliente guardarCliente(String cedula) {
+	public Cliente guardarCliente(Long cedula) {
 		Cliente cliente = getByID(cedula);
 		if(cliente == null && cedula != null){
 			cliente = new Cliente();

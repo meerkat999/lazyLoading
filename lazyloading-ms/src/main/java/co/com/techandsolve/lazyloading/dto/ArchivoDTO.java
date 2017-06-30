@@ -8,7 +8,7 @@ public class ArchivoDTO implements Serializable{
 	
 	private byte[] archivo_data;
 	
-	private String cliente_id;
+	private Long cliente_id;
 	
 	private Integer archivo_id;
 
@@ -20,11 +20,11 @@ public class ArchivoDTO implements Serializable{
 		this.archivo_data = archivo_data;
 	}
 
-	public String getCliente_id() {
+	public Long getCliente_id() {
 		return cliente_id;
 	}
 
-	public void setCliente_id(String cliente_id) {
+	public void setCliente_id(Long cliente_id) {
 		this.cliente_id = cliente_id;
 	}
 

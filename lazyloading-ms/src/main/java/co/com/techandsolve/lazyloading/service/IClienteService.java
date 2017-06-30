@@ -6,8 +6,8 @@ public interface IClienteService {
 
 	Cliente save(Cliente cliente);
 
-	Cliente getByID(String cedula);
+	Cliente getByID(Long cedula);
 
-	Cliente guardarCliente(String cedula);
+	Cliente guardarCliente(Long cedula);
 	
 }

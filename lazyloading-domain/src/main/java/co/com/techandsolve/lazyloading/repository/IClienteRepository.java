@@ -6,6 +6,6 @@ import org.springframework.data.repository.cdi.Eager;
 import co.com.techandsolve.lazyloading.domain.Cliente;
 
 @Eager
-public interface IClienteRepository extends JpaRepository<Cliente,String> {
+public interface IClienteRepository extends JpaRepository<Cliente,Long> {
 
 }

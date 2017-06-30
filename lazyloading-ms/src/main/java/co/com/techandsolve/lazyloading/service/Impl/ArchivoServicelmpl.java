@@ -5,6 +5,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.transaction.Transactional.TxType;
 
+import co.com.techandsolve.lazyloading.constants.ConstantesErrores;
 import co.com.techandsolve.lazyloading.domain.Archivo;
 import co.com.techandsolve.lazyloading.domain.Cliente;
 import co.com.techandsolve.lazyloading.dto.ArchivoDTO;
@@ -28,6 +29,7 @@ public class ArchivoServicelmpl  implements IArchivoService {
 	@Override
 	@Transactional(value=TxType.REQUIRED, rollbackOn=Exception.class) 
 	public Archivo saveAndGenerateMovements(ArchivoDTO archivoDTO) {
+		validarDTO(archivoDTO);
 		Archivo archivo = null;
 		if(archivoDTO != null){
 			archivo = persistEntity(archivoDTO);
@@ -47,6 +49,12 @@ public class ArchivoServicelmpl  implements IArchivoService {
 
 	private Archivo save(Archivo archivo) {
 		return repository.save(archivo);
+	}
+	
+	private void validarDTO(ArchivoDTO archivoDTO) {
+		if(archivoDTO.getArchivo_data() == null || archivoDTO.getCliente_id() == null || archivoDTO.getCliente_id() == null){
+			throw new RuntimeException(ConstantesErrores.MOVIMIENTO_ERROR_DTO);
+		}
 	}
 	
 

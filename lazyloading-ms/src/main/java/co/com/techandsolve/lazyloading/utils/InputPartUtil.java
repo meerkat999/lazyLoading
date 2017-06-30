@@ -8,19 +8,22 @@ import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 
+import co.com.techandsolve.lazyloading.constants.ConstantesErrores;
+
 public class InputPartUtil {
 
 	private final static Logger LOGGER = Logger.getLogger(InputPartUtil.class);
 	
-	public static String getStringFromInputPart(List<InputPart> inputParts){
-		String string = null;
+	public static Long getLongFromInputPart(List<InputPart> inputParts){
+		Long result = null;
 		try {
-			string = inputParts.stream().findFirst().get().getBody(String.class, null);
+			result = inputParts.stream().findFirst().get().getBody(Long.class, null);
 		} catch (IOException e) {
-			LOGGER.error("Error capturando el string desde el inputpart.");
+			LOGGER.error(ConstantesErrores.PARSE_ERROR_LONG);
 			LOGGER.error(e.getMessage());
+			throw new RuntimeException(ConstantesErrores.PARSE_ERROR_LONG);
 		}
-		return string;
+		return result;
 	}
 	
 	public static byte[] getBytesFromFileFromInputPart(List<InputPart> inputParts) {
@@ -29,8 +32,9 @@ public class InputPartUtil {
 			InputStream streamFile = inputParts.stream().findFirst().get().getBody(InputStream.class, null);
 			byteArray = IOUtils.toByteArray(streamFile);
 		} catch (IOException e) {
-			LOGGER.error("Error conviertiendo el archivo al arreglo de bytes.");
+			LOGGER.error(ConstantesErrores.PARSE_ERROR_FILE);
 			LOGGER.error(e.getMessage());
+			throw new RuntimeException(ConstantesErrores.PARSE_ERROR_FILE);
 		}
 		return byteArray;
 	}

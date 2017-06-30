@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.management.RuntimeErrorException;
-
 import org.apache.log4j.Logger;
 
 import com.google.gson.Gson;
@@ -31,6 +29,17 @@ public class ParseUtil {
 		return new Gson().toJson(list);
 	}
 	
+	public static boolean isInteger(String s) {
+	    try { 
+	        Integer.parseInt(s); 
+	    } catch(NumberFormatException e) { 
+	        return false; 
+	    } catch(NullPointerException e) {
+	        return false;
+	    }
+	    return true;
+	}
+	
 	public static List<Integer> stringToListInteger(String string){
 		List<Integer> lineasNumericas = new ArrayList<>();
 		try {
@@ -40,7 +49,7 @@ public class ParseUtil {
 				lineasNumericas.add(Integer.parseInt(l));
 			});
 		} catch (Exception e) {
-			throw new RuntimeErrorException(null, "Error parseando el archivo. Archivo incorrecto.");
+			throw new RuntimeException("Error parseando el archivo. Archivo incorrecto.");
 		}
 		return lineasNumericas;
 	}
